@@ -1,0 +1,12 @@
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+  
+  <definition name="render" template="/WEB-INF/jsps/render/layout.jsp">
+    <put-attribute name="bodyContent" value="/WEB-INF/jsps/render/bodyContent.jsp"/>
+  </definition>
+  
+ 
+</tiles-definitions>

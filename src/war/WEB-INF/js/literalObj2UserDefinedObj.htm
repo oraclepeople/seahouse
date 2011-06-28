@@ -1,0 +1,34 @@
+<script language="javascript" type="text/javascript">
+<!--
+
+function Cat(c) {
+  this.id = c.id;
+  this.name = c.name;
+}
+Cat.prototype.meow = function() {alert('meow');}
+Cat.prototype.displayName= function() {alert(this.name);}
+
+var cats = [
+  { id: 0, name: 'Persian' },
+  { id: 1, name: 'Calico' },
+  { id: 2, name: 'Tabby' }
+];
+
+
+for (i = 0; i < cats.length; i++) {
+   alert(cats[i].id + ' & ' + cats[i].name);
+}  
+
+i = 0; 
+for (i = 0; i < cats.length; i++) {
+  cats[i] = new Cat(cats[i]);
+}
+
+
+
+cats[0].meow();  // displays "meow"
+cats[0].displayName();  // display "Persian"
+
+
+//-->
+</script>

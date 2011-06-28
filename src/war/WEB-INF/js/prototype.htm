@@ -1,0 +1,58 @@
+<script language="javascript" type="text/javascript">
+<!--
+
+function cat(name) {
+	this.name = name;
+	
+	this.talk = function() {
+		alert( this.name + " say meeow!" )
+	}
+} 
+
+cat1 = new cat("felix")
+cat1.talk() //alerts "felix says meeow!"
+
+cat2 = new cat("ginger")
+cat2.talk() //alerts "ginger says meeow!"
+
+
+
+cat.prototype.changeName = function(name) {
+	this.name = name;
+}
+
+//firstCat = new cat("pursur")
+//firstCat.changeName("Bill")
+//firstCat.talk() //alerts "Bill says meeow!"
+
+//Normal function 
+function dog(dog){
+ alert (dog + " say wangwang !")
+}
+
+// We can turn it into a object
+dog.prototype.changeColor = function(color) {
+ alert("Color changed to " + color);
+}
+
+dog1 = dog("doggy");
+
+//wont work; Seems have to use "new" to creat the object. Compare this with the following dogLiteral.changeColor("green")
+//dog1.changeColor("red");
+
+//wont work;
+dog.changeColor("red");
+
+dog2 = new dog("dog2");
+dog2.changeColor("yellow");
+
+dogLiteral = {
+  color: "black",
+  changeColor: function (color){ alert("Color in  dogLiteral changed to " + color )}
+  };
+
+dogLiteral.changeColor("green");
+
+//-->
+
+</script>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans default-autowire="byName">
+    
+	<bean id="handlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+		
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+     	<description>Configuration for the tiles framework.</description>
+     	
+     	<property name="definitionsFactoryClass">
+      		<value>org.apache.tiles.definition.UrlDefinitionsFactory</value>
+    	</property>
+    	
+    	<property name="definitions">
+      		<list>
+        		<value>/WEB-INF/tiles/tiles-defs.xml</value>
+      		</list>
+    	</property>
+  	</bean>
+		
+	
+	<bean id="viewResolver"		class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+		<property name="basenames">
+			<list>
+				<value>config/views-web</value>
+			</list>
+		</property>
+		<property name="defaultParentView">
+			<value>defaultView</value>
+		</property>
+		<property name="order" value="1" />
+	</bean>
+	
+	<bean id="urlViewResolver"  class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    	<property name="prefix" value="/WEB-INF/jsps/"/>
+    	<property name="suffix" value=".jsp"/>
+    	<property name="order" value="2" />
+   </bean>
+	
+	<bean name="/tags.htm" class="org.hf.nearsea.web.controller.TagsTestController" >
+	 <property name="methodNameResolver">
+		<ref bean="paramResolver"/>
+	 </property>
+		
+	 <property name="searchEngine" value="testTags/searchEngine" />	
+	 <property name="viewReferer" value="testTags/viewReferer" />
+	 <property name="mainView" value="testTags/main" />
+	</bean>
+	
+   	<bean id="paramResolver" class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		<property name="paramName"><value>action</value></property>
+	</bean>	
+	
+	<bean name="/hello.htm" class="org.hf.nearsea.web.controller.HelloController" >
+	 <property name="helloView" value="helloView" />	
+	 <property name="weapon"  ref="sword" /> 	
+	</bean>
+
+	<bean name="/render.htm" class="org.hf.nearsea.web.controller.HelloController" >
+	 <property name="helloView" value="renderView" />	
+	 <property name="weapon"  ref="sword" /> 	
+	</bean>
+	
+	<bean id="sword" name="sword" class="org.hf.nearsea.aop.Sword" />
+	<bean id="swordAdvice" name="swordAdvice" class="org.hf.nearsea.aop.SwordAdvice" />
+
+	<bean id="proxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+	  <property name="beanNames">
+	    <list><value>swo*</value></list>
+	  </property>
+	  <property name="interceptorNames">
+	    <list><value>swordAdvice</value></list>
+	  </property>
+	</bean>
+		
+	<bean name="/session.htm" class="org.hf.nearsea.web.controller.SessionController" />
+
+
+	
+</beans>
