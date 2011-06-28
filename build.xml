@@ -56,15 +56,41 @@
 			<path refid="external.libs.path" />
 		</path>
 		<javac srcdir="src/local-src" debug="on" destdir="${base.build.dir}/mygoogle" 	classpathref="web-src.compile.class.path" />
-        <jar destfile="target/dist/mygoogle.jar" basedir="target/mygoogle" />
+                <jar destfile="target/dist/mygoogle.jar" basedir="target/mygoogle" />
 
-		<java classname="org.hf.aic.ITDiscount">
-			<classpath>
-			 <pathelement location="target/dist/mygoogle.jar"/>
-			 <pathelement path="${external.libs.path}"/>
-			</classpath>
-		</java>
 	</target>
+
+         <target name="aic" depends="mygoogle">
+                <java classname="org.hf.aic.ITDiscount">
+                        <classpath>
+                         <pathelement location="target/dist/mygoogle.jar"/>
+                         <fileset dir="lib"> <include name="**/*.jar"/> </fileset>
+                        </classpath>
+                </java>
+        </target>
+
+        <target name="fs" depends="mygoogle">
+                <java classname="org.hf.google.FStatement">
+                        <classpath>
+                         <pathelement location="target/dist/mygoogle.jar"/>
+                         <fileset dir="lib"> <include name="**/*.jar"/> </fileset>
+                        </classpath>
+                </java>
+        </target>
+
+        <target name="quote" depends="mygoogle">
+                <echo message=" run ant as : ant quote -Duser=username@gmail.com  -Dpass=password" />
+                <java classname="org.hf.google.MyGoogle">
+                        <arg line="${user}" />
+                        <arg line="${pass}" />
+                        <classpath>
+                         <pathelement location="target/dist/mygoogle.jar"/>
+                         <fileset dir="lib"> <include name="**/*.jar"/> </fileset>
+                        </classpath>
+                </java>
+        </target>
+
+
 
 
 	<target name="war" depends="compile, copyResource">
