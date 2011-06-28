@@ -1,4 +1,4 @@
-package or.hf.aic;
+package org.hf.aic;
 
 public final class IT {
 	

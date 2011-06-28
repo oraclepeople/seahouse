@@ -56,15 +56,14 @@
 			<path refid="external.libs.path" />
 		</path>
 		<javac srcdir="src/local-src" debug="on" destdir="${base.build.dir}/mygoogle" 	classpathref="web-src.compile.class.path" />
+        <jar destfile="target/dist/mygoogle.jar" basedir="target/mygoogle" />
 
-		<copy todir="${base.build.dir}/mygoogle">
-			<fileset dir="lib/google" />
-			<fileset dir="lib/httpunit" />
-			<fileset dir="lib/joda" />
-			<fileset dir="src/local-src/" includes="*.sh"/>
-		</copy>
-
-		
+		<java classname="org.hf.aic.ITDiscount">
+			<classpath>
+			 <pathelement location="target/dist/mygoogle.jar"/>
+			 <pathelement path="${external.libs.path}"/>
+			</classpath>
+		</java>
 	</target>
 
 
