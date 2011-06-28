@@ -1,0 +1,78 @@
+<project name="hf" default="deploy">
+	<property file="build.properties" />
+	 
+	<path id="external.libs.path">
+		<fileset dir="${commons.lib.dir}" />
+		<fileset dir="${spring.lib.dir}" includes="*.jar"/>
+		<fileset dir="${aspectj.lib.dir}" includes="*.jar"/>
+		<fileset dir="${container.lib.dir}" />
+		<fileset dir="lib/google" includes="*.jar" />
+		<fileset dir="lib/joda" includes="*.jar" />
+		<fileset dir="lib/httpunit" includes="*.jar" />
+	</path> 
+
+	<target name="clean">
+		<delete dir="${base.build.dir}/dist" failonerror="true" />
+		<delete dir="${base.build.dir}/war" failonerror="true" />
+	</target>
+
+	<target name="prepare">
+		<mkdir dir="${dist.dir}" />
+	</target>
+	
+
+	<target name="compile" depends="prepare">
+		<mkdir dir="${war.classes.dir}" />
+		<path id="web-src.compile.class.path">
+			<path refid="external.libs.path" />
+		</path>
+		<javac srcdir="${web.src.dir}" debug="on" destdir="${war.classes.dir}" 	classpathref="web-src.compile.class.path" />
+
+	</target>
+
+
+	<target name="copyResource" depends="compile">
+		<mkdir dir="${war.build.dir}" />
+
+		<copy todir="${war.build.dir}">
+			<fileset dir="${war.static.src.dir}" includes="**/*.*" excludes="WEB-INF/web.xml" />
+			<fileset dir="${web.src.dir}" includes="**/*.properties" excludes="WEB-INF/web.xml" />
+		</copy>
+
+		<copy todir="${war.build.dir}/WEB-INF/lib">
+			<fileset dir="${spring.lib.dir}" />
+			<fileset dir="${aspectj.lib.dir}" />
+			<fileset dir="${commons.lib.dir}" />
+			<fileset dir="${container.lib.dir}" />
+			<fileset dir="${tiles.lib.dir}" />
+		</copy>
+	</target>
+
+	<target name="mygoogle" depends="prepare">
+		<mkdir dir="${base.build.dir}/mygoogle" />
+		<path id="web-src.compile.class.path">
+			<path refid="external.libs.path" />
+		</path>
+		<javac srcdir="src/local-src" debug="on" destdir="${base.build.dir}/mygoogle" 	classpathref="web-src.compile.class.path" />
+
+		<copy todir="${base.build.dir}/mygoogle">
+			<fileset dir="lib/google" />
+			<fileset dir="lib/httpunit" />
+			<fileset dir="lib/joda" />
+			<fileset dir="src/local-src/" includes="*.sh"/>
+		</copy>
+
+		
+	</target>
+
+
+	<target name="war" depends="compile, copyResource">
+		<war warfile="${dist.dir}/${ant.project.name}.war" basedir="${war.build.dir}" webxml="${war.static.src.dir}/WEB-INF/web.xml" />
+	</target>
+
+	<target name="deploy" depends="clean, war" if="jboss.deploy">
+		<copy todir="${jboss.deploy}" file="${dist.dir}/${ant.project.name}.war" />
+	</target>
+
+
+</project>
