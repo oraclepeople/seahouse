@@ -79,10 +79,11 @@
         </target>
 
         <target name="quote" depends="mygoogle">
-                <echo message=" run ant as : ant quote -Duser=username@gmail.com  -Dpass=password" />
+                <echo message=" run ant as : ant quote -Duser=username@gmail.com  -Dpass=password -Dpid=portfolio_id" />
                 <java classname="org.hf.google.MyGoogle">
                         <arg line="${user}" />
                         <arg line="${pass}" />
+                        <arg line="${pid}" />
                         <classpath>
                          <pathelement location="target/dist/mygoogle.jar"/>
                          <fileset dir="lib"> <include name="**/*.jar"/> </fileset>
