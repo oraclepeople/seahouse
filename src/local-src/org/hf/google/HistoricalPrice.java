@@ -70,8 +70,6 @@ public final class HistoricalPrice {
 					minPrice = aPrice;
 					minDate = webTable.getTableCell(i, 0).getText();
 				}
-				
-				
 		}
 		
 		WebTable dailyTable = getPriceTable(ticker, new DateTime().minusMonths(MONTHS_BACK), 

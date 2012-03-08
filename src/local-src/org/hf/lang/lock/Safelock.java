@@ -1,8 +1,8 @@
-package org.hf.lang;
+package org.hf.lang.lock;
 
+import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.Random;
 
 /**
  * Alphonse and Gaston are friends, and great believers in courtesy. 

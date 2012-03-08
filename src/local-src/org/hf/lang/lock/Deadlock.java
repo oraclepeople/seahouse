@@ -1,4 +1,4 @@
-package org.hf.lang;
+package org.hf.lang.lock;
 
 public final class Deadlock {
 	
@@ -22,6 +22,17 @@ public final class Deadlock {
         public synchronized void bowBack(Friend bower) {
             System.out.format("%s: %s has bowed back to me!%n",  this.name, bower.getName());
         }
+        
+        
+        public synchronized void bow2(Friend bower) {
+            System.out.format("%s: %s has bowed to me!%n",   this.name, bower.getName());
+            bower.bowBack2(this);
+        }
+        
+        public  void bowBack2(Friend bower) {
+            System.out.format("%s: %s has bowed back to me!%n",  this.name, bower.getName());
+        }
+
     }
 
     public static void main(String[] args) {
@@ -35,9 +46,13 @@ public final class Deadlock {
            }
         }).start();
         
+        //expect the following always finished first
         new Thread(new Runnable() {
             public void run() { 
-            	gaston.bow(alphonse); 
+            	// this wont deadlock
+            	// gaston.bow2(alphonse);
+            	// this will deadlock
+            	gaston.bow(alphonse);
             }
         }).start();
     }
