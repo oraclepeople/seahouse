@@ -1,3 +1,4 @@
+package org.hf.lang;
 // Simple framework for timing concurrent execution
 
 import java.util.concurrent.*;
@@ -7,6 +8,7 @@ public class ConcurrentTimer {
 
     public static long time(Executor executor, int concurrency,
             final Runnable action) throws InterruptedException {
+    	
         final CountDownLatch ready = new CountDownLatch(concurrency);
         final CountDownLatch start = new CountDownLatch(1);
         final CountDownLatch done = new CountDownLatch(concurrency);
