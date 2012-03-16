@@ -3,6 +3,7 @@ package org.hf.lang.guardedblocks;
 import java.util.Random;
 
 public class Consumer implements Runnable {
+	
     private Drop drop;
 
     public Consumer(Drop drop) {

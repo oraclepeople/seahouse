@@ -26,7 +26,6 @@
 	<classpathentry kind="lib" path="lib/htmlunit/cssparser-0.9.5.jar"/>
 	<classpathentry kind="lib" path="lib/htmlunit/htmlunit-2.8.jar"/>
 	<classpathentry kind="lib" path="lib/htmlunit/htmlunit-core-js-2.8.jar"/>
-	<classpathentry kind="lib" path="lib/htmlunit/httpclient-4.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/htmlunit/httpcore-4.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/htmlunit/httpmime-4.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/htmlunit/nekohtml-1.9.14.jar"/>

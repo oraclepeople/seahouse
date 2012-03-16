@@ -15,7 +15,7 @@ public class Drop {
         // Wait until message is available.
         while (empty) {
             try {
-            	System.out.println(" Take waiting");
+            	System.out.println(" Take waiting " + System.nanoTime());
                 wait();
             } catch (InterruptedException e) {}
         }
@@ -32,7 +32,7 @@ public class Drop {
         // Wait until message has been retrieved.
         while (!empty) {
             try { 
-            	System.out.println(" Put waiting");
+            	System.out.println(" Put waiting " + System.nanoTime());
                 wait();
             } catch (InterruptedException e) {}
         }
