@@ -1,4 +1,4 @@
-package org.hf.concurrent;
+package org.hf.concurrent.chp6;
 
 import static org.hf.concurrent.LaunderThrowable.launderThrowable;
 
@@ -28,6 +28,7 @@ public abstract class Renderer {
         final List<ImageInfo> info = scanForImageInfo(source);
         CompletionService<ImageData> completionService =
                 new ExecutorCompletionService<ImageData>(executor);
+        
         for (final ImageInfo imageInfo : info)
             completionService.submit(new Callable<ImageData>() {
                 public ImageData call() {
@@ -50,12 +51,9 @@ public abstract class Renderer {
         }
     }
 
-    interface ImageData {
-    }
+    interface ImageData {  }
 
-    interface ImageInfo {
-        ImageData downloadImage();
-    }
+    interface ImageInfo {    ImageData downloadImage();   }
 
     abstract void renderText(CharSequence s);
 

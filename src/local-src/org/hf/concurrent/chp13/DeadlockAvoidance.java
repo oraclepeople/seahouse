@@ -1,4 +1,4 @@
-package org.hf.concurrent;
+package org.hf.concurrent.chp13;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
@@ -22,6 +22,7 @@ public class DeadlockAvoidance {
                                  long timeout,
                                  TimeUnit unit)
             throws InsufficientFundsException, InterruptedException {
+    	
         long fixedDelay = getFixedDelayComponentNanos(timeout, unit);
         long randMod = getRandomDelayModulusNanos(timeout, unit);
         long stopTime = System.nanoTime() + unit.toNanos(timeout);

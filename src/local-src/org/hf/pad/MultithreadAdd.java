@@ -40,6 +40,8 @@ public class MultithreadAdd implements Runnable{
 //			multithreadAdd.run();
 //		}
 //		System.out.println(c2.getCounter() + " : " + (System.nanoTime() - start2) );
+		
+		exec.shutdown();
 	}
 	
  

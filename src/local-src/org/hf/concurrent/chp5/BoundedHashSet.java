@@ -1,4 +1,4 @@
-package org.hf.concurrent;
+package org.hf.concurrent.chp5;
 
 import java.util.Collections;
 import java.util.HashSet;

@@ -1,7 +1,6 @@
-package org.hf.concurrent;
+package org.hf.concurrent.chp6;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -24,6 +23,7 @@ public class RenderWithTimeBudget {
     Page renderPageWithAd() throws InterruptedException {
         long endNanos = System.nanoTime() + TIME_BUDGET;
         Future<Ad> f = exec.submit(new FetchAdTask());
+        
         // Render the page while waiting for the ad
         Page page = renderPageBody();
         Ad ad;
@@ -37,6 +37,7 @@ public class RenderWithTimeBudget {
             ad = DEFAULT_AD;
             f.cancel(true);
         }
+        
         page.setAd(ad);
         return page;
     }
@@ -44,8 +45,7 @@ public class RenderWithTimeBudget {
     Page renderPageBody() { return new Page(); }
 
 
-    static class Ad {
-    }
+    static class Ad { }
 
     static class Page {
         public void setAd(Ad ad) { }
