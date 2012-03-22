@@ -17,11 +17,12 @@ import org.hf.concurrent.LaunderThrowable;
 public class Preloader {
 	
     ProductInfo loadProductInfo() throws DataLoadException {
-        return null;
+         System.out.println("load product information");
+         return null;
     }
 
     private final FutureTask<ProductInfo> future =
-        new FutureTask<ProductInfo>(new Callable<ProductInfo>() {
+        new FutureTask<ProductInfo> (new Callable<ProductInfo>() {
             public ProductInfo call() throws DataLoadException {
                 return loadProductInfo();
             }
@@ -33,6 +34,7 @@ public class Preloader {
 
     public ProductInfo get()  throws DataLoadException, InterruptedException {
         try {
+        	System.out.println("Get information");
             return future.get();
         } catch (ExecutionException e) {
             Throwable cause = e.getCause();
@@ -43,8 +45,14 @@ public class Preloader {
         }
     }
 
-    interface ProductInfo {
-    }
+    interface ProductInfo {}
+    
+    public static void main(String[] args) throws DataLoadException, InterruptedException {
+		Preloader preloader = new Preloader();
+		preloader.start();
+		preloader.get();
+		
+	}
 }
 
 class DataLoadException extends Exception { }

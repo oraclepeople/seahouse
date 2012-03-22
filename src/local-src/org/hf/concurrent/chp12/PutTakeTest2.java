@@ -1,9 +1,10 @@
-package org.hf.concurrent;
+package org.hf.concurrent.chp12;
 
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
+
 
 import junit.framework.TestCase;
 
@@ -14,20 +15,22 @@ import junit.framework.TestCase;
  *
  * @author Brian Goetz and Tim Peierls
  */
-public class PutTakeTest extends TestCase {
+public class PutTakeTest2 extends TestCase {
+	
     protected static final ExecutorService pool = Executors.newCachedThreadPool();
     protected CyclicBarrier barrier;
     protected final SemaphoreBoundedBuffer<Integer> bb;
+    
     protected final int nTrials, nPairs;
     protected final AtomicInteger putSum = new AtomicInteger(0);
     protected final AtomicInteger takeSum = new AtomicInteger(0);
 
     public static void main(String[] args) throws Exception {
-        new PutTakeTest(10, 10, 100000).test(); // sample parameters
+        new PutTakeTest2(10, 10, 100000).test(); // sample parameters
         pool.shutdown();
     }
 
-    public PutTakeTest(int capacity, int npairs, int ntrials) {
+    public PutTakeTest2(int capacity, int npairs, int ntrials) {
         this.bb = new SemaphoreBoundedBuffer<Integer>(capacity);
         this.nTrials = ntrials;
         this.nPairs = npairs;

@@ -1,4 +1,4 @@
-package org.hf.concurrent;
+package org.hf.concurrent.chp12;
 
 import java.util.concurrent.CountDownLatch;
 

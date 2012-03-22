@@ -40,5 +40,37 @@ public class BoundedBufferTest extends TestCase{
 	        fail();
 	    }
 	}
+	
+	/** HS own */
+	public void testPutBlocksWhenFull() {
+	    final BoundedBuffer<Integer> bb = new BoundedBuffer<Integer>(10);
+	    for ( int i = 0 ; i < 10; ++i) {
+	    	try {
+				bb.put(i);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	    
+	    Thread putter = new Thread() {
+	        public void run() {
+	            try {
+	                bb.put(11);
+	                fail();  // if we get here, it's an error
+	            } catch (InterruptedException success) { }
+	        }};
+	    try {
+	    	putter.start();
+	        Thread.sleep(LOCKUP_DETECT_TIMEOUT);
+	        putter.interrupt();
+	        putter.join(LOCKUP_DETECT_TIMEOUT);
+	        assertFalse(putter.isAlive());
+//	        assertTrue(taker.isInterrupted());
+	    } catch (Exception unexpected) {
+	        fail();
+	    }
+	}
+
 
 }

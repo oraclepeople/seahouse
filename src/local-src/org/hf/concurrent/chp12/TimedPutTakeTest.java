@@ -1,6 +1,7 @@
-package org.hf.concurrent;
+package org.hf.concurrent.chp12;
 
 import java.util.concurrent.CyclicBarrier;
+
 
 /**
  * TimedPutTakeTest
@@ -9,7 +10,7 @@ import java.util.concurrent.CyclicBarrier;
  *
  * @author Brian Goetz and Tim Peierls
  */
-public class TimedPutTakeTest extends PutTakeTest {
+public class TimedPutTakeTest extends PutTakeTest2 {
     private BarrierTimer timer = new BarrierTimer();
 
     public TimedPutTakeTest(int cap, int pairs, int trials) {
@@ -21,14 +22,17 @@ public class TimedPutTakeTest extends PutTakeTest {
         try {
             timer.clear();
             for (int i = 0; i < nPairs; i++) {
-                pool.execute(new PutTakeTest.Producer());
-                pool.execute(new PutTakeTest.Consumer());
+                pool.execute(new PutTakeTest2.Producer());
+                pool.execute(new PutTakeTest2.Consumer());
             }
+            
             barrier.await();
             barrier.await();
+            
             long nsPerItem = timer.getTime() / (nPairs * (long) nTrials);
             System.out.print("Throughput: " + nsPerItem + " ns/item");
             assertEquals(putSum.get(), takeSum.get());
+            
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -36,8 +40,10 @@ public class TimedPutTakeTest extends PutTakeTest {
 
     public static void main(String[] args) throws Exception {
         int tpt = 100000; // trials per thread
+        
         for (int cap = 1; cap <= 1000; cap *= 10) {
             System.out.println("Capacity: " + cap);
+            
             for (int pairs = 1; pairs <= 128; pairs *= 2) {
                 TimedPutTakeTest t = new TimedPutTakeTest(cap, pairs, tpt);
                 System.out.print("Pairs: " + pairs + "\t");
@@ -48,7 +54,9 @@ public class TimedPutTakeTest extends PutTakeTest {
                 System.out.println();
                 Thread.sleep(1000);
             }
+            
         }
-        PutTakeTest.pool.shutdown();
+        
+        PutTakeTest2.pool.shutdown();
     }
 }

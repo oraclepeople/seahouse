@@ -8,12 +8,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class PutTakeTest {
 
 	private static final ExecutorService pool = Executors.newCachedThreadPool();
-	private final AtomicInteger putSum = new AtomicInteger(0);
-	private final AtomicInteger takeSum = new AtomicInteger(0);
+	protected final AtomicInteger putSum = new AtomicInteger(0);
+	protected final AtomicInteger takeSum = new AtomicInteger(0);
 	
-	private final CyclicBarrier barrier;
-	private final BoundedBuffer<Integer> bb;
-	private final int nTrials, nPairs;
+	protected final CyclicBarrier barrier;
+	protected final BoundedBuffer<Integer> bb;
+	protected final int nTrials, nPairs;
 
 	public static void main(String[] args) {
 		new PutTakeTest(10, 10, 100000).test(); // sample parameters

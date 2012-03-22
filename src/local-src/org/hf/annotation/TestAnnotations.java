@@ -9,12 +9,12 @@ public class TestAnnotations {
 	 
 	   @Test_Retention (doTestRetention="Hello retention test")
 	   public void doSomeTestRetention() {
-	      System.out.printf("Testing annotation 'Retention'");
+	      System.out.println("Testing annotation 'Retention'");
 	   }
 	   
 	   @Test_Documented(doTestDocument="Hello document")
 	   public void doSomeTestDocumented() {
-	      System.out.printf("Testing annotation 'Documented'");
+	      System.out.println("Testing annotation 'Documented'");
 	   }
 
 	}

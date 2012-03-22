@@ -1,4 +1,4 @@
-package org.hf.concurrent;
+package org.hf.concurrent.chp12;
 
 import java.util.concurrent.Semaphore;
 
@@ -21,7 +21,8 @@ public class SemaphoreBoundedBuffer <E> {
     public SemaphoreBoundedBuffer(int capacity) {
         if (capacity <= 0)
             throw new IllegalArgumentException();
-        availableItems = new Semaphore(0);
+        
+        availableItems  = new Semaphore(0);
         availableSpaces = new Semaphore(capacity);
         items = (E[]) new Object[capacity];
     }
