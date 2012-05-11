@@ -1,4 +1,4 @@
-package org.hf.lang.lock;
+ package org.hf.lang.lock;
 
 public final class Deadlock {
 	
@@ -22,8 +22,7 @@ public final class Deadlock {
         public synchronized void bowBack(Friend bower) {
             System.out.format("%s: %s has bowed back to me!%n",  this.name, bower.getName());
         }
-        
-        
+                
         public synchronized void bow2(Friend bower) {
             System.out.format("%s: %s has bowed to me!%n",   this.name, bower.getName());
             bower.bowBack2(this);
@@ -32,10 +31,9 @@ public final class Deadlock {
         public  void bowBack2(Friend bower) {
             System.out.format("%s: %s has bowed back to me!%n",  this.name, bower.getName());
         }
-
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
     	
         final Friend alphonse = new Friend("Alphonse");
         final Friend gaston = new Friend("Gaston");
@@ -45,6 +43,7 @@ public final class Deadlock {
             	alphonse.bow(gaston); 
            }
         }).start();
+        
         
         //expect the following always finished first
         new Thread(new Runnable() {

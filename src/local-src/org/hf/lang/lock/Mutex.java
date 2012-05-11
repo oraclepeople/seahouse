@@ -10,8 +10,12 @@ import java.util.concurrent.locks.Lock;
 
 public class Mutex implements Lock, Serializable {
 
+ 	private static final long serialVersionUID = 1L;
+
 	// Our internal helper class
 	private static class Sync extends AbstractQueuedSynchronizer {
+		private static final long serialVersionUID = -5640950777202963018L;
+
 		// Report whether in locked state
 		protected boolean isHeldExclusively() {
 			return getState() == 1;

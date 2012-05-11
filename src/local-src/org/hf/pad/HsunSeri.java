@@ -14,13 +14,13 @@ public final class HsunSeri implements Serializable{
 	private void writeObject(java.io.ObjectOutputStream out)
 	throws IOException {
 		
-          out.writeObject(this);
+          out.defaultWriteObject();
 	}
 
 	
 	private void readObject(java.io.ObjectInputStream in)
 	throws IOException, ClassNotFoundException {
-           in.readObject();
+           in.defaultReadObject();
 	}
 
 

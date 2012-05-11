@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+
 /**
  * Alphonse and Gaston are friends, and great believers in courtesy. 
  * A strict rule of courtesy is that when you bow to a friend, 
@@ -14,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  */
 public class Safelock {
-
+	
 	static class Friend {
 		
 		private final String name;
@@ -73,8 +74,7 @@ public class Safelock {
 			System.out.format("%s: %s has bowed back to me!%n", this.name, bower.getName());
 		}
 	}
-
-
+	
 	static class BowLoop implements Runnable {
 		
 		private Friend bower;

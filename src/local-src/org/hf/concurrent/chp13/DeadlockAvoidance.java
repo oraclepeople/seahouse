@@ -87,7 +87,6 @@ public class DeadlockAvoidance {
         }
     }
 
-    class InsufficientFundsException extends Exception {
-    }
+    class InsufficientFundsException extends Exception {}
 }
 
