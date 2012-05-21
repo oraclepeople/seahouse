@@ -20,7 +20,7 @@ public class SemaphoreOnLock {
     private final Lock lock = new ReentrantLock();
     // CONDITION PREDICATE: permitsAvailable (permits > 0)
     private final Condition permitsAvailable = lock.newCondition();
-    @GuardedBy("lock") private int permits;
+    @GuardedBy(value = "lock") private int permits;
 
     SemaphoreOnLock(int initialPermits) {
         lock.lock();

@@ -1,11 +1,11 @@
 package org.hf.annotation;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+@Documented
 @Retention(RetentionPolicy.RUNTIME)
-
-public @interface Test_Retention {
-   String doTestRetention();
+public @interface MyDocumented {
+   String doTestDocument();
 }
-
