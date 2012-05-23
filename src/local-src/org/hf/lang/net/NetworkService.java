@@ -1,4 +1,4 @@
-package org.hf.lang.javadoc;
+package org.hf.lang.net;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 /** Copied from Java doc ExecutorService */
 
 class NetworkService implements Runnable {
+	
 	private final ServerSocket serverSocket;
 	private final ExecutorService pool;
 
